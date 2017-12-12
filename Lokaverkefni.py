@@ -6,7 +6,6 @@
 
 import random
 
-
 byrjun=0
 while byrjun==0:# Valmynd
     print()
@@ -37,10 +36,11 @@ while byrjun==0:# Valmynd
             else:
                 self.gisk[stafur] = True
 
-        def prenta_gisk(self):# fall sem prentar út alla stafina sem þú giskaðir á
-            print("Þú hefur giskað á:", end=" ")
+        def prenta_gisk(self):# fall sem prentar út alla stafina sem þú giskaðir á vitlaust
+            print("Vitlaus gisk:", end=" ")
             for gisk in self.gisk:
-                print(gisk, end=" ")
+                if gisk not in self.svar:
+                    print(gisk, end=" ")
             print()
 
         def prenta_orð_falið(self):
