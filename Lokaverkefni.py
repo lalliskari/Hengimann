@@ -6,10 +6,6 @@
 
 import random
 
-# TODO: lesa inn orð úr orðaskrá
-# TODO: Dickt, list, föll, klasar
-# TODO: reyna setja mynd HANGMAN
-
 
 byrjun=0
 while byrjun==0:# Valmynd
@@ -22,12 +18,13 @@ while byrjun==0:# Valmynd
     val=int(input("Veldu lið 1-4: "))
     print("")
 
-    orð = []
+    orð = []# Tómur listi búinn til
     class Hengimann: #Klasinn Hengimann
         def __init__(self, orð):
             self.orð = orð
             self.svar = orð[random.randint(0, len(orð) - 1)]
             self.gisk = {}
+
 
         def giska(self,stafur):# fallið giska sem heldur utan um stafinn sem þú giskar á
             stafur = gisk.lower()
@@ -67,21 +64,26 @@ while byrjun==0:# Valmynd
                     vitlaus_gisk += 1
             return vitlaus_gisk > 5
 
+
         def buinn(self):
             return self.tap() or self.sigur()
 
 
+        def spilaaftur():#fall sem segir til hvort þú viljir spila leikinn áfram eða ekki
+            print()
+            print("Viltu spila aftur? (Já eða Nei)")
+            return input().lower().startswith('j')
 
 
-
-
+    Leikur_buinn = False
+    staða = [0, 0]
     if val == 1: # ef valið er 1 í valmynd
-        print("Þú hefur valið Nöfn í Hangman")
+        print("Þú hefur valið að giska á nöfn í Hangman")
         print("Þú tapar ef þú slærð inn 6 viltausa stafi")
         with open('Nöfn.txt', 'r',encoding = 'utf-8') as f: # lesa textaskánna Nöfn.txt og setja í listann "orð"
             for line in f:
                 orð = line.split(" ")
-            print(orð)
+            #print(orð)
             while True:
                 hengimann = Hengimann(orð)
                 while not hengimann.buinn():
@@ -92,23 +94,27 @@ while byrjun==0:# Valmynd
                     print()
 
                 if hengimann.sigur():
+                    staða[0] = staða[0] + 1# setja í lista ef þú vannst
                     print("Þetta er rétt hjá þér, nafnið er:",hengimann.svar)
                     print("-----------------ÞÚ VANNST--------------------")
-                    break
+                    Leikur_buinn = True
                 else:
+                    staða[1] = staða[1] + 1#setja í lista ef þú tapaðir
                     print("Rétt nafn er:",hengimann.svar)
                     print("-----------------ÞÚ TAPAÐIR-------------------")
-                    break
+                    Leikur_buinn = True
 
-
-
-
-
-
+                if Leikur_buinn:
+                    if Hengimann.spilaaftur():
+                        Leikur_buinn = False
+                    else:# ef þú hættir í leiknum þá prentast út hve oft þú vannst og tapaðir
+                        print("Þú vannst",staða[0],"sinnum og tapaðir",staða[1],"sinnum.")
+                        print()
+                        break
 
 
     elif val == 2:
-        print("Þú hefur valið Dýr í Hangman")
+        print("Þú hefur valið að giska á dýr í Hangman")
         print("Þú tapar ef þú slærð inn 6 viltausa stafi")
         with open('Dýr.txt', 'r',encoding = 'utf-8') as f:# lesa textaskánna Dýr.txt og setja í listann "orð"
             for line in f:
@@ -123,23 +129,28 @@ while byrjun==0:# Valmynd
                     hengimann.prenta_gisk()
                     print()
                 if hengimann.sigur():
+                    staða[0] = staða[0] + 1# setja í lista ef þú vannst
                     print("Þetta er rétt hjá þér, dýrið er:",hengimann.svar)
                     print("-----------------ÞÚ VANNST--------------------")
-                    break
+                    Leikur_buinn = True
                 else:
+                    staða[1] = staða[1] + 1#setja í lista ef þú tapaðir
                     print("Rétt nafn á dýri er:",hengimann.svar)
                     print("-----------------ÞÚ TAPAÐIR-------------------")
-                    break
+                    Leikur_buinn = True
 
-
-
-
-
+                if Leikur_buinn:
+                    if Hengimann.spilaaftur():
+                        Leikur_buinn = False
+                    else:
+                        print("Þú vannst",staða[0],"sinnum og tapaðir",staða[1],"sinnum.")
+                        print()
+                        break
 
 
 
     elif val == 3:
-        print("Þú hefur valið Lönd í Hangman")
+        print("Þú hefur valið að giska á lönd í Hangman")
         print("Þú tapar ef þú slærð inn 6 viltausa stafi")
         with open('Lönd.txt', 'r',encoding = 'utf-8') as f:# lesa textaskánna Lönd.txt og setja í listann "orð"
             for line in f:
@@ -154,17 +165,31 @@ while byrjun==0:# Valmynd
                     hengimann.prenta_gisk()
                     print()
                 if hengimann.sigur():
+                    staða[0] = staða[0] + 1# setja í lista ef þú vannst
                     print("Þetta er rétt hjá þér, landið er:",hengimann.svar)
                     print("-----------------ÞÚ VANNST--------------------")
-                    break
+                    Leikur_buinn = True
                 else:
+                    staða[1] = staða[1] + 1#setja í lista ef þú tapaðir
                     print("Rétt land er:",hengimann.svar)
                     print("-----------------ÞÚ TAPAÐIR-------------------")
-                    break
+                    Leikur_buinn = True
 
+                if Leikur_buinn:
+                    if Hengimann.spilaaftur():
+                        Leikur_buinn = False
+                    else:
+                        print("Þú vannst",staða[0],"sinnum og tapaðir",staða[1],"sinnum.")
+                        print()
+                        break
 
+    elif val == 4:#Liður 4 = hætta í forritinu
 
-
+        print("Takk fyrir að keyra forritið")
+        byrjun = 1
+    else:
+        print("Þú hefur valið vitlaust, reyndu aftur")
+        print()
 
 
 
