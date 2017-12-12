@@ -1,6 +1,6 @@
 #Lárus Óskar Lárusson
 #FOR1TÖ05BD
-#2017
+#12.12.2017
 #Lokaverkefni
 
 
