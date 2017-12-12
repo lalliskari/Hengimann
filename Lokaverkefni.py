@@ -37,7 +37,7 @@ while byrjun==0:# Valmynd
             else:
                 self.gisk[stafur] = True
 
-        def prenta_gisk(self):# fall sem prentar út stafinn sem ú giskaðir á
+        def prenta_gisk(self):# fall sem prentar út alla stafina sem þú giskaðir á
             print("Þú hefur giskað á:", end=" ")
             for gisk in self.gisk:
                 print(gisk, end=" ")
@@ -51,7 +51,7 @@ while byrjun==0:# Valmynd
                     print("_", end=" ")
             print()
 
-        def sigur(self):
+        def sigur(self): # gá hvort það er búið að giska á alla stafina í orðinu
             for stafur in self.svar:
                 if stafur not in self.gisk:
                     return False
@@ -65,11 +65,11 @@ while byrjun==0:# Valmynd
             return vitlaus_gisk > 5
 
 
-        def buinn(self):
+        def buinn(self): # gáir hvort leikur er búinn
             return self.tap() or self.sigur()
 
 
-        def spilaaftur():#fall sem segir til hvort þú viljir spila leikinn áfram eða ekki
+        def spilaaftur(): # fall sem segir til hvort þú viljir spila leikinn áfram eða ekki
             print()
             print("Viltu spila aftur? (Já eða Nei)")
             return input().lower().startswith('j')
